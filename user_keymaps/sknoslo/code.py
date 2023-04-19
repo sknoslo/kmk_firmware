@@ -6,7 +6,6 @@ from kmk.keys import KC
 from kmk.scanners import DiodeOrientation
 
 from kmk.modules.layers import Layers
-from kmk.modules.oneshot import OneShot
 from kmk.modules.modtap import ModTap
 from kmk.modules.holdtap import HoldTapRepeat
 from kmk.modules.split import Split, SplitType, SplitSide
@@ -28,10 +27,6 @@ keyboard = KMKKeyboard()
 keyboard.modules.append(Layers())
 keyboard.modules.append(ModTap())
 
-oneshot = OneShot()
-oneshot.tap_time = 2000
-keyboard.modules.append(oneshot)
-
 keyboard.modules.append(split)
 
 
@@ -52,14 +47,15 @@ ALT_L = KC.MT(KC.L, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=
 CTL_K = KC.MT(KC.K, KC.RCTL, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
 SFT_J = KC.MT(KC.J, KC.RSFT, prefer_hold=True, tap_interrupted=True, tap_time=200, repeat=HoldTapRepeat.TAP)
 
-OLGUI = KC.OS(KC.LGUI)
-OLALT = KC.OS(KC.LALT)
-OLSFT = KC.OS(KC.LSFT)
-OLCTL = KC.OS(KC.LCTL)
+# TODO: these aliases don't really make sense any more. rename more abstractly or nix all together.
+OLGUI = KC.LGUI
+OLALT = KC.LALT
+OLSFT = KC.LSFT
+OLCTL = KC.LCTL
 
-ORGUI = KC.OS(KC.RGUI)
-ORSFT = KC.OS(KC.RSFT)
-ORCTL = KC.OS(KC.RCTL)
+ORGUI = KC.RGUI
+ORSFT = KC.RSFT
+ORCTL = KC.RCTL
 
 UNDO = KC.LCTL(KC.Z)
 REDO = KC.LCTL(KC.Y)
@@ -94,7 +90,7 @@ keyboard.keymap = [
     # NAV
     [
         XXXX,      XXXX,      XXXX,      XXXX,      XXXX,           REDO,      CUT,       COPY,      PASTE,     UNDO,
-        OLGUI,     OLALT,     OLSFT,     OLCTL,     XXXX,           KC.LEFT,   KC.DOWN,   KC.UP,     KC.RGHT,   KC.CAPS,
+        OLGUI,     OLALT,     OLCTL,     OLSFT,     XXXX,           KC.LEFT,   KC.DOWN,   KC.UP,     KC.RGHT,   XXXX,
         XXXX,      XXXX,      XXXX,      XXXX,      XXXX,           KC.INS,    KC.HOME,   KC.PGDN,   KC.PGUP,   KC.END,
                               XXXX,      ____,      XXXX,           KC.SPC,    KC.ENT,    KC.BKSP
     ],
@@ -102,7 +98,7 @@ keyboard.keymap = [
     # DEV
     [
         XXXX,      XXXX,      XXXX,      XXXX,      XXXX,           KC.UNDS,   KC.EQL,    KC.LPRN,   KC.RPRN,   KC.GRV,
-        OLGUI,     OLALT,     OLSFT,     OLCTL,     XXXX,           KC.MINS,   KC.PLUS,   KC.LCBR,   KC.RCBR,   KC.COLN,
+        OLGUI,     OLALT,     OLCTL,     OLSFT,     XXXX,           KC.MINS,   KC.PLUS,   KC.LCBR,   KC.RCBR,   KC.COLN,
         XXXX,      XXXX,      XXXX,      XXXX,      XXXX,           KC.PIPE,   KC.BSLS,   KC.LBRC,   KC.RBRC,   KC.SCLN,
                               XXXX,      XXXX,      ____,           KC.SPC,    KC.ENT,    KC.BKSP
     ],

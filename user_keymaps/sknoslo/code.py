@@ -7,8 +7,11 @@ from kmk.scanners import DiodeOrientation
 
 from kmk.modules.layers import Layers
 from kmk.modules.modtap import ModTap
+from kmk.modules.tapdance import TapDance
 from kmk.modules.holdtap import HoldTapRepeat
 from kmk.modules.split import Split, SplitType, SplitSide
+from kmk.modules.capsword import CapsWord
+
 
 from storage import getmount
 
@@ -26,16 +29,17 @@ keyboard = KMKKeyboard()
 
 keyboard.modules.append(Layers())
 keyboard.modules.append(ModTap())
-
+keyboard.modules.append(TapDance())
 keyboard.modules.append(split)
+keyboard.modules.append(CapsWord())
 
 
-NAV_ESC = KC.LT(1, KC.ESC, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
-DEV_TAB = KC.LT(2, KC.TAB, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
+NAV_ESC = KC.LT(2, KC.ESC, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
+DEV_TAB = KC.LT(3, KC.TAB, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
 
-SYM_ENT = KC.LT(3, KC.ENT, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
-NUM_SPC = KC.LT(4, KC.SPC, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
-FUN_BKSP = KC.LT(5, KC.BKSP, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
+SYM_ENT = KC.LT(4, KC.ENT, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
+NUM_SPC = KC.LT(5, KC.SPC, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
+FUN_BKSP = KC.LT(6, KC.BKSP, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
 
 GUI_A = KC.MT(KC.A, KC.LGUI, prefer_hold=False, tap_interrupted=False, tap_time=500, repeat=HoldTapRepeat.TAP)
 ALT_S = KC.MT(KC.S, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=500, repeat=HoldTapRepeat.TAP)
@@ -66,19 +70,13 @@ PASTE = KC.LCTL(KC.V)
 CSC = KC.LCTL(KC.LSFT(KC.C))
 CSV = KC.LCTL(KC.LSFT(KC.V))
 
+QWERT = KC.TD(KC.NO, KC.DF(0))
+COLMK = KC.TD(KC.NO, KC.DF(1))
+
 XXXX = KC.NO
 ____ = KC.TRNS
 
-# TODO: make colemak a toggleable layer so that I can practice.
 keyboard.keymap = [
-    # COLEMAK BASE
-    # [
-    #     KC.Q,      KC.W,      KC.F,      KC.P,      KC.G,           KC.J,      KC.L,      KC.U,      KC.Y,      KC.QUOT,
-    #     KC.A,      KC.R,      KC.S,      KC.T,      KC.D,           KC.H,      KC.N,      KC.E,      KC.I,      KC.O,
-    #     KC.Z,      KC.X,      KC.C,      KC.V,      KC.B,           KC.K,      KC.M,      KC.COMM,   KC.DOT,    KC.SLSH,
-    #                           KC.DEL,    NAV_ESC,   DEV_TAB,        NUM_SPC,   SYM_ENT,   FUN_BKSP
-    # ],
-
     # QWERTY BASE
     [
         KC.Q,      KC.W,      KC.E,      KC.R,      KC.T,           KC.Y,      KC.U,      KC.I,      KC.O,      KC.P,
@@ -87,17 +85,25 @@ keyboard.keymap = [
                               KC.DEL,    NAV_ESC,   DEV_TAB,        NUM_SPC,   SYM_ENT,   FUN_BKSP
     ],
 
+    # COLEMAK MOD-DH BASE
+    [
+        KC.Q,      KC.W,      KC.F,      KC.P,      KC.B,           KC.J,      KC.L,      KC.U,      KC.Y,      KC.QUOT,
+        KC.A,      KC.R,      KC.S,      KC.T,      KC.G,           KC.M,      KC.N,      KC.E,      KC.I,      KC.O,
+        KC.Z,      KC.X,      KC.C,      KC.D,      KC.V,           KC.K,      KC.H,      KC.COMM,   KC.DOT,    KC.SLSH,
+                              KC.DEL,    NAV_ESC,   DEV_TAB,        NUM_SPC,   SYM_ENT,   FUN_BKSP
+    ],
+
     # NAV
     [
-        XXXX,      XXXX,      XXXX,      XXXX,      XXXX,           REDO,      CUT,       COPY,      PASTE,     UNDO,
-        OLGUI,     OLALT,     OLCTL,     OLSFT,     XXXX,           KC.LEFT,   KC.DOWN,   KC.UP,     KC.RGHT,   XXXX,
+        XXXX,      XXXX,      COLMK,     QWERT,     XXXX,           REDO,      CUT,       COPY,      PASTE,     UNDO,
+        OLGUI,     OLALT,     OLCTL,     OLSFT,     XXXX,           KC.LEFT,   KC.DOWN,   KC.UP,     KC.RGHT,   KC.CW,
         XXXX,      XXXX,      XXXX,      XXXX,      XXXX,           KC.INS,    KC.HOME,   KC.PGDN,   KC.PGUP,   KC.END,
                               XXXX,      ____,      XXXX,           KC.SPC,    KC.ENT,    KC.BKSP
     ],
 
     # DEV
     [
-        XXXX,      XXXX,      XXXX,      XXXX,      XXXX,           KC.UNDS,   KC.EQL,    KC.LPRN,   KC.RPRN,   KC.GRV,
+        XXXX,      XXXX,      COLMK,     QWERT,     XXXX,           KC.UNDS,   KC.EQL,    KC.LPRN,   KC.RPRN,   KC.GRV,
         OLGUI,     OLALT,     OLCTL,     OLSFT,     XXXX,           KC.MINS,   KC.PLUS,   KC.LCBR,   KC.RCBR,   KC.COLN,
         XXXX,      XXXX,      XXXX,      XXXX,      XXXX,           KC.PIPE,   KC.BSLS,   KC.LBRC,   KC.RBRC,   KC.SCLN,
                               XXXX,      XXXX,      ____,           KC.SPC,    KC.ENT,    KC.BKSP
@@ -105,7 +111,7 @@ keyboard.keymap = [
 
     # SYM
     [
-        KC.LCBR,   KC.AMPR,   KC.ASTR,   KC.LPRN,   KC.RCBR,        XXXX,      XXXX,      XXXX,      XXXX,      XXXX,
+        KC.LCBR,   KC.AMPR,   KC.ASTR,   KC.LPRN,   KC.RCBR,        XXXX,      QWERT,     COLMK,     XXXX,      XXXX,
         KC.COLN,   KC.DLR,    KC.PERC,   KC.CIRC,   KC.PLUS,        XXXX,      ORSFT,     ORCTL,     OLALT,     ORGUI,
         KC.TILD,   KC.EXLM,   KC.AT,     KC.HASH,   KC.PIPE,        XXXX,      XXXX,      XXXX,      XXXX,      XXXX,
                               KC.LPRN,   KC.RPRN,   KC.UNDS,        XXXX,      ____,      XXXX
@@ -113,7 +119,7 @@ keyboard.keymap = [
 
     # NUM
     [
-        KC.LBRC,   KC.N7,     KC.N8,     KC.N9,     KC.RBRC,        XXXX,      XXXX,      XXXX,      XXXX,      XXXX,
+        KC.LBRC,   KC.N7,     KC.N8,     KC.N9,     KC.RBRC,        XXXX,      QWERT,     COLMK,     XXXX,      XXXX,
         KC.SCLN,   KC.N4,     KC.N5,     KC.N6,     KC.EQL,         XXXX,      ORSFT,     ORCTL,     OLALT,     ORGUI,
         KC.GRV,    KC.N1,     KC.N2,     KC.N3,     KC.BSLS,        XXXX,      XXXX,      XXXX,      XXXX,      XXXX,
                               KC.DOT,    KC.N0,     KC.MINS,        ____,      XXXX,      XXXX
@@ -121,7 +127,7 @@ keyboard.keymap = [
 
     # FUN
     [
-        KC.F12,    KC.F7,     KC.F8,     KC.F9,     XXXX,           XXXX,      XXXX,      XXXX,      XXXX,      XXXX,
+        KC.F12,    KC.F7,     KC.F8,     KC.F9,     XXXX,           XXXX,      QWERT,     COLMK,     XXXX,      XXXX,
         KC.F11,    KC.F4,     KC.F5,     KC.F6,     XXXX,           XXXX,      ORSFT,     ORCTL,     OLALT,     ORGUI,
         KC.F10,    KC.F1,     KC.F2,     KC.F3,     XXXX,           XXXX,      XXXX,      XXXX,      XXXX,      XXXX,
                               KC.DEL,    KC.ESC,    KC.TAB,         XXXX,      XXXX,      ____

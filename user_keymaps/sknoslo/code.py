@@ -33,36 +33,38 @@ keyboard.modules.append(TapDance())
 keyboard.modules.append(split)
 keyboard.modules.append(CapsWord())
 
+quick_tap = 160
+slow_tap = 500
 
-NAV_ESC = KC.LT(2, KC.ESC, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
-DEV_TAB = KC.LT(3, KC.TAB, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
+NAV_ESC = KC.LT(2, KC.ESC, prefer_hold=False, tap_interrupted=False, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
+DEV_TAB = KC.LT(3, KC.TAB, prefer_hold=False, tap_interrupted=False, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
 
-SYM_ENT = KC.LT(4, KC.ENT, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
-NUM_SPC = KC.LT(5, KC.SPC, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
-FUN_BKSP = KC.LT(6, KC.BKSP, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
+SYM_ENT = KC.LT(4, KC.ENT, prefer_hold=False, tap_interrupted=False, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
+NUM_SPC = KC.LT(5, KC.SPC, prefer_hold=False, tap_interrupted=False, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
+FUN_BKSP = KC.LT(6, KC.BKSP, prefer_hold=False, tap_interrupted=False, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
 
-GUI_A = KC.MT(KC.A, KC.LGUI, prefer_hold=False, tap_interrupted=False, tap_time=500, repeat=HoldTapRepeat.TAP)
+GUI_A = KC.MT(KC.A, KC.LGUI, prefer_hold=False, tap_interrupted=False, tap_time=slow_tap, repeat=HoldTapRepeat.TAP)
 
-ALT_S = KC.MT(KC.S, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=500, repeat=HoldTapRepeat.TAP)
-ALT_R = KC.MT(KC.R, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=500, repeat=HoldTapRepeat.TAP)
+ALT_S = KC.MT(KC.S, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=slow_tap, repeat=HoldTapRepeat.TAP)
+ALT_R = KC.MT(KC.R, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=slow_tap, repeat=HoldTapRepeat.TAP)
 
-CTL_D = KC.MT(KC.D, KC.LCTL, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
-CTL_S = KC.MT(KC.S, KC.LCTL, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
+CTL_D = KC.MT(KC.D, KC.LCTL, prefer_hold=False, tap_interrupted=False, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
+CTL_S = KC.MT(KC.S, KC.LCTL, prefer_hold=False, tap_interrupted=False, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
 
-SFT_F = KC.MT(KC.F, KC.LSFT, prefer_hold=True, tap_interrupted=True, tap_time=200, repeat=HoldTapRepeat.TAP)
-SFT_T = KC.MT(KC.T, KC.LSFT, prefer_hold=True, tap_interrupted=True, tap_time=200, repeat=HoldTapRepeat.TAP)
+SFT_F = KC.MT(KC.F, KC.LSFT, prefer_hold=True, tap_interrupted=True, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
+SFT_T = KC.MT(KC.T, KC.LSFT, prefer_hold=True, tap_interrupted=True, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
 
-GUI_QUOT = KC.MT(KC.QUOT, KC.RGUI, prefer_hold=False, tap_interrupted=False, tap_time=500, repeat=HoldTapRepeat.TAP)
-GUI_O = KC.MT(KC.O, KC.RGUI, prefer_hold=False, tap_interrupted=False, tap_time=500, repeat=HoldTapRepeat.TAP)
+GUI_QUOT = KC.MT(KC.QUOT, KC.RGUI, prefer_hold=False, tap_interrupted=False, tap_time=slow_tap, repeat=HoldTapRepeat.TAP)
+GUI_O = KC.MT(KC.O, KC.RGUI, prefer_hold=False, tap_interrupted=False, tap_time=slow_tap, repeat=HoldTapRepeat.TAP)
 
-ALT_L = KC.MT(KC.L, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=500, repeat=HoldTapRepeat.TAP) # Use LALT, because RALT is special
-ALT_I = KC.MT(KC.I, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=500, repeat=HoldTapRepeat.TAP) # Use LALT, because RALT is special
+ALT_L = KC.MT(KC.L, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=slow_tap, repeat=HoldTapRepeat.TAP) # Use LALT, because RALT is special
+ALT_I = KC.MT(KC.I, KC.LALT, prefer_hold=False, tap_interrupted=False, tap_time=slow_tap, repeat=HoldTapRepeat.TAP) # Use LALT, because RALT is special
 
-CTL_K = KC.MT(KC.K, KC.RCTL, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
-CTL_E = KC.MT(KC.E, KC.RCTL, prefer_hold=False, tap_interrupted=False, tap_time=200, repeat=HoldTapRepeat.TAP)
+CTL_K = KC.MT(KC.K, KC.RCTL, prefer_hold=False, tap_interrupted=False, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
+CTL_E = KC.MT(KC.E, KC.RCTL, prefer_hold=False, tap_interrupted=False, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
 
-SFT_J = KC.MT(KC.J, KC.RSFT, prefer_hold=True, tap_interrupted=True, tap_time=200, repeat=HoldTapRepeat.TAP)
-SFT_N = KC.MT(KC.N, KC.RSFT, prefer_hold=True, tap_interrupted=True, tap_time=200, repeat=HoldTapRepeat.TAP)
+SFT_J = KC.MT(KC.J, KC.RSFT, prefer_hold=True, tap_interrupted=True, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
+SFT_N = KC.MT(KC.N, KC.RSFT, prefer_hold=True, tap_interrupted=True, tap_time=quick_tap, repeat=HoldTapRepeat.TAP)
 
 # TODO: these aliases don't really make sense any more. rename more abstractly or nix all together.
 OLGUI = KC.LGUI
